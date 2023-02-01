@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Blog\BlogController;
+use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+
 
 Auth::routes();
 
