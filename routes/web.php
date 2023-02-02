@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Blog\BlogController;
+use App\Http\Livewire\Front\Blog\FrontPostDetailsComponent;
+use App\Http\Livewire\Front\Blog\FrontPostsComponent;
+use App\Http\Livewire\Front\Blog\FrontTopicsComponent;
+use App\Http\Livewire\Front\Home\FrontHomeComponent;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,16 +19,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.index');
-});
+Route::get('/', FrontHomeComponent::class)->name('home');
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-
+Route::get('/blog', FrontTopicsComponent::class)->name('blog');
+Route::get('/blog/topics/{topic}', FrontPostsComponent::class)->name('blog.posts');
+Route::get('/blog/topics/{topic}/{post}', FrontPostDetailsComponent::class)->name('blog.details');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 
 Route::group(['prefix' => 'admin'], function () {

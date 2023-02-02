@@ -1,1 +1,3 @@
 @extends('front.index')
+
+{{ $slot }}
